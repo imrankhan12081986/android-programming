@@ -1,0 +1,86 @@
+// (activity_main.xml)
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <EditText
+        android:id="@+id/numberView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:hint="Enter First Number"
+        android:inputType="number" />
+
+    <EditText
+        android:id="@+id/numberView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:hint="Enter Second Number"
+        android:inputType="number"
+        android:layout_marginTop="10dp"/>
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        android:layout_marginTop="10dp"
+        android:onClick="check"/>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text=""
+        android:textSize="25sp"/>
+</LinearLayout>
+
+
+
+// (MainActivity.java)
+
+package com.example.myapplication;
+
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+
+public class MainActivity extends AppCompatActivity {
+
+    EditText numberView1, numberView2;
+    TextView textView;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        numberView1 = findViewById(R.id.numberView1);
+        numberView2 = findViewById(R.id.numberView2);
+        textView = findViewById(R.id.textView);
+    }
+
+    public void check(View v){
+        int num1 = Integer.parseInt(numberView1.getText().toString());
+        int num2 = Integer.parseInt(numberView2.getText().toString());
+
+        if(num1 > 10 && num2 > 10){
+            textView.setText("Both numbers are greater than 10. Please enter new numbers.");
+            numberView1.setText("");
+            numberView2.setText("");
+        }
+        else {
+            textView.setText("Number1 : " + num1 + "\nNumber2 : " + num2);
+        }
+    }
+}

@@ -1,0 +1,37 @@
+// (res/drawable/border.xml)
+// (How to create border.xml? : Right click on drawable -> New -> Drawable Resource File -> Name 'border.xml' and click 'ok' :)
+
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid
+        android:color="#0B10FF"/>
+    <stroke
+        android:width="20dp"
+        android:color="@color/white"/>
+</shape>
+
+
+
+// (activity_main.xml)
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@drawable/border"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello World!"
+        android:textColor="@color/white"
+        android:textSize="30sp" />
+
+</LinearLayout>
+
+

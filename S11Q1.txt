@@ -1,0 +1,121 @@
+// (Create a file in res/values : Right click on values -> New -> Values Resource File)
+
+(res/values/arrayElements.xml)
+
+
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="font_size_list">
+        <item>10</item>
+        <item>20</item>
+        <item>30</item>
+        <item>40</item>
+        <item>50</item>
+    </string-array>
+    
+    <string-array name="font_color_list">
+        <item>#000000</item>
+        <item>#FF9800</item>
+        <item>#4CAF50</item>
+        <item>#03A9F4</item>
+        <item>#E91E63</item>
+    </string-array>
+
+    <string-array name="font_family_list">
+        <item>sans-serif-black</item>
+        <item>sans-serif-condensed</item>
+        <item>sans-serif-smallcaps</item>
+    </string-array>
+</resources>
+
+
+
+// (activity_main.xml)
+
+ <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-smallcaps"
+        android:text="Hello World" />
+
+     <Spinner
+         android:id="@+id/spinnerSize"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_marginTop="20dp"
+         android:entries="@array/font_size_list"/>
+
+     <Spinner
+         android:id="@+id/spinnerColors"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_marginTop="20dp"
+         android:entries="@array/font_color_list"/>
+
+     <Spinner
+         android:id="@+id/spinnerFamily"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_marginTop="20dp"
+         android:entries="@array/font_family_list"/>
+
+
+     <Button
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="Apply"
+         android:layout_marginTop="20dp"
+         android:onClick="applyChanges"/>
+
+</LinearLayout>
+
+
+
+
+// MainActivity.java :
+
+package com.example.myapplication;
+import android.graphics.Color;
+import android.graphics.Typeface;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Spinner;
+import android.widget.TextView;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    TextView textView;
+    Spinner spinnerSize;
+    Spinner spinnerColors;
+    Spinner spinnerFamily;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        textView = findViewById(R.id.textView);
+        spinnerSize = findViewById(R.id.spinnerSize);
+        spinnerColors = findViewById(R.id.spinnerColors);
+        spinnerFamily = findViewById(R.id.spinnerFamily);
+
+    }
+
+    public void applyChanges(View v){
+        textView.setTextSize(Float.parseFloat(spinnerSize.getSelectedItem().toString()));
+        textView.setTextColor(Color.parseColor(spinnerColors.getSelectedItem().toString()));
+        textView.setTypeface(Typeface.create(spinnerFamily.getSelectedItem().toString(), Typeface.NORMAL));
+    }
+}
+

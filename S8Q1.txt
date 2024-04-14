@@ -1,0 +1,114 @@
+//  (activity_main.xml)
+
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    tools:context=".MainActivity">
+
+    <TableRow>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Username : "
+            android:textSize="25sp"/>
+
+        <EditText
+            android:id="@+id/usernameView"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content" />
+
+    </TableRow>
+
+    <TableRow>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Password : "
+            android:textSize="25sp" />
+
+        <EditText
+            android:id="@+id/passView"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"/>
+
+    </TableRow>
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="LOGIN"
+        android:textSize="20sp"
+        android:layout_marginTop="20dp"/>
+</TableLayout>
+
+
+// (MainActivity.java)
+
+package com.example.myapplication;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+public class MainActivity extends AppCompatActivity {
+
+    EditText usernameView, passView;
+    Button button;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        usernameView = findViewById(R.id.usernameView);
+        passView = findViewById(R.id.passView);
+        button = findViewById(R.id.button);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if( validCredentials() ){
+                    startActivity(new Intent(MainActivity.this, SecondActivity.class));
+                }
+                else {
+                    Toast.makeText(MainActivity.this, "Incorrect Password! ..use 'admin'", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+    private boolean validCredentials() {
+        return usernameView.getText().toString().equals("admin") &&
+                passView.getText().toString().equals("admin");
+    }
+}
+
+
+
+// (activity_second)
+
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    tools:context=".SecondActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Welcome to Home Page"
+        android:textSize="25sp"
+        android:gravity="center"/>
+</TableLayout>
